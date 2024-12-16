@@ -20,16 +20,14 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
       width: 100%;
-      max-width: 600px; /* max width */
-      box-sizing: border-box;
       animation: fadeIn 1s ease;
     }
 
     h3 {
       text-align: center;
       color: #4CAF50;
-      margin-bottom: 20px;
     }
 
     label {
@@ -41,7 +39,7 @@
 
     input, select, textarea {
       width: 100%;
-      padding: 12px;
+      padding: 10px;
       margin: 8px 0 15px 0;
       border-radius: 5px;
       border: 1px solid #ddd;
@@ -56,7 +54,7 @@
 
     button {
       width: 100%;
-      padding: 14px;
+      padding: 12px;
       background-color: #4CAF50;
       color: white;
       border: none;
@@ -80,18 +78,13 @@
       to { opacity: 1; }
     }
 
-    /* Responsive Design */
-    @media screen and (max-width: 600px) {
+    @media (max-width: 768px) {
       #userForm {
-        padding: 15px;
-      }
-
-      input, select, textarea {
         padding: 10px;
       }
 
-      button {
-        padding: 12px;
+      input, select, textarea {
+        font-size: 12px;
       }
     }
   </style>
@@ -142,16 +135,16 @@
   </form>
 
   <script>
-    emailjs.init('gi-oSSYsbNx48MfbO'); // Your EmailJS public key
+    emailjs.init('your_public_key_here'); // Your EmailJS public key
 
     document.getElementById("userForm").addEventListener("submit", function(event) {
       event.preventDefault();
 
-      emailjs.sendForm('service_dm8yj7i', 'template_nhfvr0i', this) 
+      emailjs.sendForm('your_service_id_here', 'your_template_id_here', this) 
         .then(function(response) {
-          alert('Your application has been submitted successfully!');
+          alert('Email sent successfully!');
         }, function(error) {
-          alert('There was an error sending your application: ' + error);
+          alert('Email sending failed: ' + error);
         });
     });
   </script>
