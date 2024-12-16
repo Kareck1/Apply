@@ -20,14 +20,16 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      width: 400px;
+      width: 100%;
+      max-width: 600px; /* max width */
+      box-sizing: border-box;
       animation: fadeIn 1s ease;
-      overflow: hidden;
     }
 
     h3 {
       text-align: center;
       color: #4CAF50;
+      margin-bottom: 20px;
     }
 
     label {
@@ -39,7 +41,7 @@
 
     input, select, textarea {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin: 8px 0 15px 0;
       border-radius: 5px;
       border: 1px solid #ddd;
@@ -54,7 +56,7 @@
 
     button {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       background-color: #4CAF50;
       color: white;
       border: none;
@@ -76,6 +78,21 @@
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 600px) {
+      #userForm {
+        padding: 15px;
+      }
+
+      input, select, textarea {
+        padding: 10px;
+      }
+
+      button {
+        padding: 12px;
+      }
     }
   </style>
 </head>
@@ -124,35 +141,17 @@
     <button type="submit">Submit</button>
   </form>
 
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
   <script>
     emailjs.init('gi-oSSYsbNx48MfbO'); // Your EmailJS public key
 
     document.getElementById("userForm").addEventListener("submit", function(event) {
       event.preventDefault();
 
-      // Send the main application email to you (the admin)
-      emailjs.sendForm('service_dm8yj7i', 'template_nhfvr0i', this)
+      emailjs.sendForm('service_dm8yj7i', 'template_nhfvr0i', this) 
         .then(function(response) {
-          alert('Application sent successfully!');
-
-          // Now send the confirmation email to the applicant
-          const applicantName = document.getElementById("username").value;
-          const applicantEmail = document.getElementById("email").value;
-
-          const data = {
-            name: applicantName,
-            to_email: applicantEmail,
-          };
-
-          emailjs.send('service_dm8yj7i', 'template_confirmation_email', data)
-            .then(function(response) {
-              alert('Confirmation email sent to applicant!');
-            }, function(error) {
-              alert('Error sending confirmation email: ' + error);
-            });
+          alert('Your application has been submitted successfully!');
         }, function(error) {
-          alert('Email sending failed: ' + error);
+          alert('There was an error sending your application: ' + error);
         });
     });
   </script>
